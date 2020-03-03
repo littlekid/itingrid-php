@@ -1,6 +1,9 @@
 # Ingrid - en [kalender för IT-Sverige](https://itingrid.se).
 
 Detta repo är backend till [itingrid.se]( https://itingrid.se ) i PHP.
+Du behöver klona repo't Ingrid också, eftersom detta repo innehåller länkar till designfilen som alla backend-lösningar delar på.
+
+
 Fritt fram att utveckla och jobba med backend i [flera olika språk](https://github.com/littlekid/itingrid/tree/master/backend)
 
 ## Kalender
