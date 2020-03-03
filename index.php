@@ -86,6 +86,11 @@ countVisits();
         $items .= '</details>';
         $items .= '</div>';
       }
+
+        $cities_with_events = array("göteborg","jönköping","lund","luleå","malmö","piteå","skåne","stockholm","uppsala");
+        if (isset($_GET['location']) && in_array(strtolower($_GET['location']), $cities_with_events)) {
+          echo "<p style='font-size: 1.8rem; text-align: center; margin: 13vh auto 0'>IT-kalender för " . ucfirst($_GET['location']) . ".</p>";
+        }
       echo $items;
     ?>
 
@@ -93,10 +98,7 @@ countVisits();
 
   <?php
 
-        $cities_with_events = array("göteborg","jönköping","lund","luleå","malmö","piteå","skåne","stockholm","uppsala");
-        if (isset($_GET['location']) && in_array(strtolower($_GET['location']), $cities_with_events)) {
-          echo "<p style='font-size: 1.8rem; text-align: center; margin: 13vh auto 0'>IT-kalender för " . ucfirst($_GET['location']) . ".</p>";
-        } else {
+        if(!isset($_GET['location'])){
           echo '<p>Poulära orter: <a href="/Göteborg">Göteborg</a>, <a href="/Jönköping">Jönköping</a>, <a href="/Lund">Lund</a>, <a href="/Stockholm">Stockholm</a>, <a href="/Uppsala">Uppsala</a></p>';
         }
   ?>
