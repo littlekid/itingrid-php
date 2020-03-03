@@ -1,3 +1,10 @@
+<?php
+include("functions.php");
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,30 +51,13 @@ countVisits();
 
     <br><br><br>
 
-      <?php
-setlocale(LC_TIME, "sv_SE.UTF-8");
+<?php
+  $calendar_events = fetchCalendarEvents();
+  if (isset($_GET)){
+    $calendar_events = filterCalendarEvents($calendar_events, $_GET);
+  }
 
-function pretty_date($date) {
-  // $date = "YYYY-MM-DD";
-  $parts = explode("-", $date);
-  return strftime('%a %-d %B', mktime(0, 0, 0, $parts[1], $parts[2], $parts[0]));
-}
-
-      $events_json = file_get_contents("calendar-items.json");
-      $calendar_events = json_decode($events_json);
-      $items = "";
-      $location_filter = $GET['location'];
-      if (isset($_GET['location']) && in_array(strtolower($_GET['location']), $cities_with_events)) {
-        $chosen_city = strtolower($_GET['location']);
-
-        function filterArray($event){
-          global $chosen_city;
-          //return (strtolower($event->location) == strtolower($chosen_city));
-          return strpos(strtolower($event->location), strtolower($chosen_city)) > -1;
-        }
-
-        $calendar_events = array_filter($calendar_events, 'filterArray');
-      }
+  $items = "";
 
       foreach ($calendar_events as $event_item) {
         $items .= '<div class="calendar-item" data-type="' . $event_item->category . '">';
