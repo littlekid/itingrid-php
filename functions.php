@@ -8,15 +8,12 @@ function filterCalendarEvents($calendarEvents, $get) {
     $location = $get['location'];
     $cities = citiesWithEvents();
     if (in_array_any_case(strtolower($location), $cities)) {
-      $calendarEvents = array_filter($calendar_events, 'filterEventsByCity');
+      $calendarEvents = array_filter($calendarEvents, function($event) use ($location) {
+        return (strpos(strtolower($event->location), strtolower($location)) > -1);
+    });
     }
   }
   return $calendarEvents;
-}
-
-function filterEventsByCity($event) {
-  //return (strtolower($event->location) == strtolower($chosen_city));
-  return strpos(strtolower($event->location), strtolower($chosen_city)) > -1;
 }
 
 function fetchCalendarEvents(){
